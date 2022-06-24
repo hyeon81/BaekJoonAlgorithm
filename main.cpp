@@ -1,43 +1,61 @@
 #include <stdio.h>
 
 int is_prime(int num) {
-    int i = 11;
+    int i = 2;
     while (i <= (num / i)) {
         if (num % i == 0)
             return (0);
-        i = i + 2;
+        i++;
     }
     return (1);
 }
 
+int is_only_prime(int n, int arr[]) {
+    int j = 0;
+    //2로 나눴을 때 소수인지 확인
+    while (j < 1229) {
+        if (n / 2 == arr[j]) {
+            printf("%d %d");
+            return (1);
+        }
+        j++;
+    }
+    return (0);
+}
+
+//2보다 큰 모든 짝수는 두 소수의 합으로 나타낼 수 있다는 것이다.
 int main() {
-    int M, N, i;
-    scanf("%d %d", &M, &N);
+    int t, n, i, a, b;
+    int j = 0;
+    int arr[1229];
+    scanf("%d", &t);
 
-    if (M == 1)
-    {
-        printf("%d\n", 2);
-        i = 3;
+    i = 3;
+    //소수만 들어간 arr 만들기
+    while (i <= 10000) {
+        if (is_prime(i) == 1) {
+            arr[j] = i;
+            j++;
+        }
+        i++;
     }
-    else if (M == 2) {
-        printf("%d\n", 2);
-        i = 3;
-    } else if (M % 2 == 0)
-        i = M + 1;
-    else
-        i = M;
 
-    while (i <= N) {
-        if (i == 3 || i == 5 || i == 7) {
-            printf("%d\n", i);
-            i = i + 2;
-            continue;
-        } else if (i % 3 == 0 || i % 5 == 0 || i % 7 == 0) {
-            i = i + 2;
-            continue;
-        } else if (is_prime(i) == 1)
-            printf("%d\n", i);
-        i = i + 2;
+    i = 0;
+    while (i < t) {
+        scanf("%d", &n);
+        a = 0;
+        b = 0;
+        j = 0;
+
+        if (n % 2 == 1) {
+            if (is_only_prime(n, arr) == 1)
+                break;
+        }
+        //2로 나눴을때 값을 가지고...
+        while (n != a + b) {
+            a = arr[j];
+        }
+        printf("%d %d\n", a, b);
+        i++;
     }
-    return 0;
 }
